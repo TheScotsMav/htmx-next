@@ -1,8 +1,8 @@
-const ReactDOMServer = (await import("react-dom/server")).default;
-
 export const runtime = "edge";
 
 export async function GET(request: Request) {
+    const ReactDOMServer = (await import("react-dom/server")).default;
+
     return new Response(ReactDOMServer.renderToStaticMarkup(<Index />), {
         headers: {
             "content-type": "text/html; charset=utf-8",
@@ -12,6 +12,8 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+    const ReactDOMServer = (await import("react-dom/server")).default;
+
     return new Response(
         ReactDOMServer.renderToStaticMarkup(<PostRequest request={request} />),
         {

@@ -1,3 +1,6 @@
+import type { ReactElement } from "react";
+import { Page } from "../components/Page";
+
 export const runtime = "edge";
 
 export async function GET(request: Request) {
@@ -15,7 +18,7 @@ export async function POST(request: Request) {
     const ReactDOMServer = (await import("react-dom/server")).default;
 
     return new Response(
-        ReactDOMServer.renderToStaticMarkup(<PostRequest request={request} />),
+        ReactDOMServer.renderToStaticMarkup(<Post request={request} />),
         {
             headers: {
                 "content-type": "text/html; charset=utf-8",
@@ -25,24 +28,19 @@ export async function POST(request: Request) {
     );
 }
 
-const Index = () => (
-    <html>
-        <head>
-            <script src="https://unpkg.com/htmx.org@1.9.6" defer></script>
-        </head>
-        <body>
+function Index(): ReactElement {
+    return (
+        <Page>
             <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-                    <button hx-post="/" hx-swap="outerHTML transition:true">
-                        Click Me
-                    </button>
-                </div>
+                <button hx-post="/" hx-swap="outerHTML transition:true">
+                    Click Me
+                </button>
             </main>
-        </body>
-    </html>
-);
+        </Page>
+    );
+}
 
-const PostRequest = ({ request }: { request: Request }) => (
+const Post = ({ request }: { request: Request }) => (
     <button hx-post="/" hx-swap="outerHTML transition:true">
         {Date.now()}
     </button>

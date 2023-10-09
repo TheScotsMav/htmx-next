@@ -8,7 +8,7 @@ dependencies:
     specifier: ^18
     version: 18.0.0
   react-dom:
-    specifier: ^18
+    specifier: ^18.0.0
     version: 18.0.0(react@18.0.0)
 
 devDependencies:

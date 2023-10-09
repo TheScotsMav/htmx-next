@@ -1,5 +1,7 @@
 const ReactDOMServer = (await import("react-dom/server")).default;
 
+export const runtime = "edge";
+
 export async function GET(request: Request) {
     return new Response(ReactDOMServer.renderToStaticMarkup(<Index />), {
         headers: {

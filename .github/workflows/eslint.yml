@@ -1,0 +1,23 @@
+name: eslint
+
+on: push
+
+jobs:
+    run-eslint:
+        name: Run eslint
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+
+            - name: Install Node.js dependencies
+              run: npm install
+
+            - name: Run eslint
+              run: npm run lint

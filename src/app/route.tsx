@@ -42,6 +42,6 @@ function Index(): ReactElement {
 
 const Post = ({ request }: { request: Request }) => (
     <button hx-post="/" hx-swap="outerHTML transition:true">
-        {Date.now()}
+        {Date.now()} is the time!
     </button>
 );

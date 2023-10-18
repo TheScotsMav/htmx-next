@@ -30,7 +30,7 @@ export function Page({
           />
         )}
         {metadata?.title && <title>{metadata.title as string}</title>}
-        <script src='https://unpkg.com/htmx.org@1.9.6' defer></script>
+        <script src='htmx.min.js' defer></script>
         <link rel='stylesheet' href='global.css' />
       </head>
       <body>{children}</body>

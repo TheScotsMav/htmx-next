@@ -554,10 +554,10 @@ video {
   justify-content: space-between;
 }
 
-.p-24 {
-  padding: 6rem;
-}
-
 .p-10 {
   padding: 2.5rem;
+}
+
+.p-24 {
+  padding: 6rem;
 }

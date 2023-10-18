@@ -2,6 +2,8 @@
 /* eslint-disable @next/next/no-head-element */
 import type { Metadata } from 'next'
 import '@/globals.css'
+import { Navigation } from './Navigation'
+import { Header } from './Header'
 
 export function Page({
   metadata,
@@ -11,7 +13,7 @@ export function Page({
   children: JSX.Element
 }) {
   return (
-    <html>
+    <html className='bg-gray-950 text-gray-100'>
       <head>
         {metadata?.colorScheme && (
           <meta name='color-scheme' content={metadata.colorScheme} />
@@ -30,10 +32,13 @@ export function Page({
           />
         )}
         {metadata?.title && <title>{metadata.title as string}</title>}
-        <script src='htmx.min.js' defer></script>
         <link rel='stylesheet' href='global.css' />
+        <script src='htmx.min.js' defer />
       </head>
-      <body>{children}</body>
+      <body className='flex min-h-screen flex-col items-center'>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }

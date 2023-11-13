@@ -1,6 +1,4 @@
-import { ReactElement } from 'react'
-
-export function ToggleView(props: { hidden?: boolean }): ReactElement {
+export function ToggleView(props: { hidden?: boolean }) {
   const hidden = props.hidden ?? false
   return (
     <>
@@ -12,7 +10,7 @@ export function ToggleView(props: { hidden?: boolean }): ReactElement {
   )
 }
 
-export function ToggleButton(props: { hidden?: boolean }): ReactElement {
+export function ToggleButton(props: { hidden?: boolean }) {
   const newParams = new URLSearchParams({
     hidden: props.hidden ? 'false' : 'true',
   } satisfies {
@@ -20,6 +18,7 @@ export function ToggleButton(props: { hidden?: boolean }): ReactElement {
   })
   return (
     <button
+      id='toggle'
       className='rounded p-6 bg-red-300 text-red-900'
       hx-get={`/api/toggle?${newParams.toString()}`}
       hx-swap='outerHTML'
@@ -30,10 +29,7 @@ export function ToggleButton(props: { hidden?: boolean }): ReactElement {
   )
 }
 
-export function ToggleDiv(props: {
-  hidden?: boolean
-  outOfBand?: boolean
-}): ReactElement {
+export function ToggleDiv(props: { hidden?: boolean; outOfBand?: boolean }) {
   const hidden = props.hidden ?? false
   let outOfBand = props.outOfBand ?? false
   return (
@@ -41,10 +37,12 @@ export function ToggleDiv(props: {
       id='modal'
       hx-swap-oob={outOfBand ? 'true' : undefined}
       className={`${
-        hidden ? 'opacity-0 scale-0' : 'opacity-100 scale-100'
-      } rounded p-6 bg-red-300 text-red-900 transition duration-500 ease-in-out`}
+        hidden
+          ? 'opacity-0 scale-0'
+          : 'opacity-100 scale-100 rounded p-6 bg-red-300 text-red-900'
+      } transition duration-500 ease-in-out`}
     >
-      Swap swap swap
+      {`${hidden ? '' : 'swap swap swap'}`}
     </div>
   )
 }

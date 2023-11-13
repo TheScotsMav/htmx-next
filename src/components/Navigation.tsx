@@ -1,3 +1,5 @@
+import { Link } from './ui/Link'
+
 export function Navigation(): JSX.Element {
   return (
     <nav
@@ -6,8 +8,8 @@ export function Navigation(): JSX.Element {
       className='flex items-center gap-3 justify-end container py-4'
       preload='mousedown'
     >
-      <a href='/'>Home</a>
-      <a href='/something'>Something</a>
+      <Link href='/'>Home</Link>
+      <Link href='/something'>Something</Link>
     </nav>
   )
 }

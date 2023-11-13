@@ -1,11 +1,10 @@
 import { Body, Page } from '../components/Page'
-import Markdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import dark from '../codeTheme'
 import markdown from './content.md'
 import { NextApiRequest } from 'next'
 import { setCookie } from 'cookies-next'
 import { ToggleView } from '@/components/ToggleView'
+import { Markdown } from '@/components/ui/Markdown'
+import { Button } from '@/components/ui/Button'
 
 export const runtime = 'edge'
 
@@ -18,6 +17,7 @@ export async function GET(request: NextApiRequest, response: Response) {
   const responeHeaders = new Headers({
     'content-type': 'text/html; charset=utf-8',
   })
+  const foo = <div hx->bar</div>
 
   if (headers['HX-Boosted'] && headers['HX-Boosted'] === 'true') {
     response = new Response(
@@ -64,38 +64,16 @@ export async function POST(request: Request) {
 function Index(): JSX.Element {
   return (
     <main className='container'>
-      <button
+      <Button
         hx-post='/'
         hx-swap='innerHTML transition:true'
-        className='rounded p-10 bg-red-700 hover:bg-red-800 w-full'
         type='button'
+        variant={'default'}
       >
         Click Me
-      </button>
+      </Button>
       <article className='prose prose-invert max-w-none'>
-        <Markdown
-          children={markdown}
-          components={{
-            code(props) {
-              const { children, className, node, ...rest } = props
-              const match = /language-(\w+)/.exec(className || '')
-              return match ? (
-                <SyntaxHighlighter
-                  className='rounded'
-                  {...rest}
-                  children={String(children).replace(/\n$/, '')}
-                  style={dark}
-                  language={match[1]}
-                  PreTag='div'
-                />
-              ) : (
-                <code {...rest} className={className}>
-                  {children}
-                </code>
-              )
-            },
-          }}
-        />
+        <Markdown>{markdown}</Markdown>
       </article>
     </main>
   )

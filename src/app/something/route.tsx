@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react'
 import { Body, Page } from '../../components/Page'
+import { Button } from '@/components/ui/Button'
 
 export const runtime = 'edge'
 
@@ -55,13 +56,13 @@ export async function POST(request: Request) {
 function Index(): ReactElement {
   return (
     <main className='container'>
-      <button
+      <Button
         hx-post='/'
         hx-swap='innerHTML transition:true'
         className='rounded p-10 bg-blue-700 hover:bg-blue-800 w-full'
       >
         Click Me
-      </button>
+      </Button>
     </main>
   )
 }

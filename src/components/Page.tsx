@@ -1,16 +1,16 @@
-/* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-head-element */
 import type { Metadata } from 'next'
-import '@/globals.css'
-import { Navigation } from './Navigation'
 import { Header } from './Header'
+import type { ReactElement } from 'react'
+
+console.log()
 
 export function Page({
   metadata,
   children,
 }: {
   metadata?: Metadata
-  children: JSX.Element
+  children?: ReactElement | JSX.Element | JSX.Element[]
 }) {
   return (
     <html className='bg-gray-950 text-gray-100'>
@@ -34,11 +34,21 @@ export function Page({
         {metadata?.title && <title>{metadata.title as string}</title>}
         <link rel='stylesheet' href='global.css' />
         <script src='htmx.min.js' defer />
+        <script
+          src='https://unpkg.com/htmx.org/dist/ext/preload.js'
+          defer
+        ></script>
       </head>
-      <body className='flex min-h-screen flex-col items-center'>
-        <Header />
-        {children}
-      </body>
+      <Body>{children}</Body>
     </html>
+  )
+}
+
+export function Body({ children }: { children?: JSX.Element | JSX.Element[] }) {
+  return (
+    <body hx-ext='preload' className='flex min-h-screen flex-col items-center'>
+      <Header />
+      {children}
+    </body>
   )
 }

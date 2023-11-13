@@ -1,18 +1,41 @@
 import type { ReactElement } from 'react'
-import { Page } from '../../components/Page'
-import { setCookie } from 'cookies-next'
+import { Body, Page } from '../../components/Page'
 
 export const runtime = 'edge'
 
-export async function GET(req: Request, res: Response) {
+export async function GET(request: Request, response: Response) {
   const ReactDOMServer = (await import('react-dom/server')).default
-  res = new Response(ReactDOMServer.renderToStaticMarkup(<Index />), {
-    headers: {
-      'content-type': 'text/html; charset=utf-8',
-    },
-    status: 200,
-  })
-  return res
+
+  const headers = request.headers
+
+  if (headers.get('HX-Boosted') === 'true') {
+    response = new Response(
+      ReactDOMServer.renderToStaticMarkup(
+        <Body>
+          <Index />
+        </Body>
+      ),
+      {
+        headers: {
+          'content-type': 'text/html; charset=utf-8',
+        },
+        status: 200,
+        statusText: 'OK',
+      }
+    )
+  } else {
+    response = new Response(
+      ReactDOMServer.renderToStaticMarkup(Page({ children: Index() })),
+      {
+        headers: {
+          'content-type': 'text/html; charset=utf-8',
+        },
+        status: 200,
+        statusText: 'OK',
+      }
+    )
+  }
+  return response
 }
 
 export async function POST(request: Request) {
@@ -31,17 +54,15 @@ export async function POST(request: Request) {
 
 function Index(): ReactElement {
   return (
-    <Page>
-      <main className='container'>
-        <button
-          hx-post='/'
-          hx-swap='innerHTML transition:true'
-          className='rounded p-10 bg-blue-700 hover:bg-blue-800 w-full'
-        >
-          Click Me
-        </button>
-      </main>
-    </Page>
+    <main className='container'>
+      <button
+        hx-post='/'
+        hx-swap='innerHTML transition:true'
+        className='rounded p-10 bg-blue-700 hover:bg-blue-800 w-full'
+      >
+        Click Me
+      </button>
+    </main>
   )
 }
 

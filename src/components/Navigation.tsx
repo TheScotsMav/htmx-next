@@ -1,11 +1,10 @@
-import type { ReactElement } from 'react'
-
-export function Navigation(): ReactElement {
+export function Navigation(): JSX.Element {
   return (
     <nav
       hx-boost='true'
       hx-swap='innerHTML transition:true'
-      className='flex items-center gap-6 justify-end container py-4'
+      className='flex items-center gap-3 justify-end container py-4'
+      preload='mousedown'
     >
       <a href='/'>Home</a>
       <a href='/something'>Something</a>

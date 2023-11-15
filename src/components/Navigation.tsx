@@ -5,7 +5,8 @@ export function Navigation(): JSX.Element {
     <nav
       hx-boost='true'
       hx-swap='innerHTML transition:true'
-      className='flex items-center gap-3 justify-end container py-4'
+      className='container flex items-center justify-end gap-3 py-4'
+      //@ts-expect-error
       preload='mousedown'
     >
       <Link href='/'>Home</Link>

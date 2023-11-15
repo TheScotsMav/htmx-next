@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-head-element */
 import type { Metadata } from 'next'
 import { Header } from './Header'

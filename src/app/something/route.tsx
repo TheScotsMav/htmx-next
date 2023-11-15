@@ -59,7 +59,7 @@ function Index(): ReactElement {
       <Button
         hx-post='/'
         hx-swap='innerHTML transition:true'
-        className='rounded p-10 bg-blue-700 hover:bg-blue-800 w-full'
+        className='w-full rounded bg-blue-700 p-10 hover:bg-blue-800'
       >
         Click Me
       </Button>

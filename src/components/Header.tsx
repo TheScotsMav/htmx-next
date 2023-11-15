@@ -6,7 +6,7 @@ export function Header(): ReactElement {
     <header
       hx-boost='true'
       hx-swap='innerHTML transition:true'
-      className='flex items-center gap-6 justify-end container py-4'
+      className='container flex items-center justify-end gap-6 py-4'
     >
       <Navigation />
     </header>

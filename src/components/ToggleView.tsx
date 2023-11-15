@@ -2,7 +2,7 @@ export function ToggleView(props: { hidden?: boolean }) {
   const hidden = props.hidden ?? false
   return (
     <>
-      <div className='flex items-center gap-3 justify-center container py-4'>
+      <div className='container flex items-center justify-center gap-3 py-4'>
         <ToggleButton hidden={hidden} />
       </div>
       <ToggleDiv hidden={hidden} />
@@ -19,7 +19,7 @@ export function ToggleButton(props: { hidden?: boolean }) {
   return (
     <button
       id='toggle'
-      className='rounded p-6 bg-red-300 text-red-900'
+      className='rounded bg-red-300 p-6 text-red-900'
       hx-get={`/api/toggle?${newParams.toString()}`}
       hx-swap='outerHTML'
       preload='mouseover'
@@ -38,8 +38,8 @@ export function ToggleDiv(props: { hidden?: boolean; outOfBand?: boolean }) {
       hx-swap-oob={outOfBand ? 'true' : undefined}
       className={`${
         hidden
-          ? 'opacity-0 scale-0'
-          : 'opacity-100 scale-100 rounded p-6 bg-red-300 text-red-900'
+          ? 'scale-0 opacity-0'
+          : 'scale-100 rounded bg-red-300 p-6 text-red-900 opacity-100'
       } transition duration-500 ease-in-out`}
     >
       {`${hidden ? '' : 'swap swap swap'}`}

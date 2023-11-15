@@ -6,7 +6,6 @@ export function Markdown({ children }: { children: string }): JSX.Element {
   return (
     <article className='prose prose-invert max-w-none'>
       <MarkdownRenderer
-        children={children}
         components={{
           code(props) {
             const { children, className, node, ...rest } = props
@@ -15,11 +14,12 @@ export function Markdown({ children }: { children: string }): JSX.Element {
               <SyntaxHighlighter
                 className='rounded'
                 {...rest}
-                children={String(children).replace(/\n$/, '')}
                 style={dark}
                 language={match[1]}
                 PreTag='div'
-              />
+              >
+                {String(children).replace(/\n$/, '')}
+              </SyntaxHighlighter>
             ) : (
               <code {...rest} className={className}>
                 {children}
@@ -27,7 +27,9 @@ export function Markdown({ children }: { children: string }): JSX.Element {
             )
           },
         }}
-      />{' '}
+      >
+        {children}
+      </MarkdownRenderer>
     </article>
   )
 }
